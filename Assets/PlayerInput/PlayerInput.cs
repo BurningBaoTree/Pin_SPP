@@ -50,28 +50,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""84aad0a0-ba73-4fd9-ac0b-8abbbe1d3c1b"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KM"",
-                    ""action"": ""moveBar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""b0ab0f2a-157e-4fd0-b75b-74fda1247dbf"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""KM"",
-                    ""action"": ""moveBar"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""left"",
                     ""id"": ""c647b703-2fe9-4029-bec9-e71fef70adf9"",
                     ""path"": ""<Keyboard>/leftArrow"",
@@ -94,6 +72,114 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""6a28c0d5-8bc3-4cec-b6d2-a1a8cc2ee404"",
+            ""actions"": [
+                {
+                    ""name"": ""TestButton1"",
+                    ""type"": ""Button"",
+                    ""id"": ""34f722bd-2bbe-40c2-935d-9c128907e927"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestButton2"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd07f307-3fcd-45a7-b537-70e67272d376"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestButton3"",
+                    ""type"": ""Button"",
+                    ""id"": ""f51a9424-69cd-44ef-b1ab-e142e8a33ecd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestButton4"",
+                    ""type"": ""Button"",
+                    ""id"": ""34d1bb1e-ab7b-46e8-a5c3-e91b94991245"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TestButton5"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b53455b-3964-4059-813e-681e48a7ddb5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4828c848-62c1-4da8-aa1f-22ca8c4e982b"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KM"",
+                    ""action"": ""TestButton1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aaaaa267-8cec-47f5-9a67-19fa21486274"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KM"",
+                    ""action"": ""TestButton2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""463ba179-9c42-4006-9501-6716a52cb936"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KM"",
+                    ""action"": ""TestButton3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6c0c6b4-2db3-42f2-bbbf-e01a640e57c3"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KM"",
+                    ""action"": ""TestButton4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b791529-9b6e-48e3-8af8-27377587a2e0"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KM"",
+                    ""action"": ""TestButton5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -113,6 +199,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_moveBar = m_Player.FindAction("moveBar", throwIfNotFound: true);
+        // Test
+        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+        m_Test_TestButton1 = m_Test.FindAction("TestButton1", throwIfNotFound: true);
+        m_Test_TestButton2 = m_Test.FindAction("TestButton2", throwIfNotFound: true);
+        m_Test_TestButton3 = m_Test.FindAction("TestButton3", throwIfNotFound: true);
+        m_Test_TestButton4 = m_Test.FindAction("TestButton4", throwIfNotFound: true);
+        m_Test_TestButton5 = m_Test.FindAction("TestButton5", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -216,6 +309,84 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Test
+    private readonly InputActionMap m_Test;
+    private List<ITestActions> m_TestActionsCallbackInterfaces = new List<ITestActions>();
+    private readonly InputAction m_Test_TestButton1;
+    private readonly InputAction m_Test_TestButton2;
+    private readonly InputAction m_Test_TestButton3;
+    private readonly InputAction m_Test_TestButton4;
+    private readonly InputAction m_Test_TestButton5;
+    public struct TestActions
+    {
+        private @PlayerInput m_Wrapper;
+        public TestActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TestButton1 => m_Wrapper.m_Test_TestButton1;
+        public InputAction @TestButton2 => m_Wrapper.m_Test_TestButton2;
+        public InputAction @TestButton3 => m_Wrapper.m_Test_TestButton3;
+        public InputAction @TestButton4 => m_Wrapper.m_Test_TestButton4;
+        public InputAction @TestButton5 => m_Wrapper.m_Test_TestButton5;
+        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+        public void AddCallbacks(ITestActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TestActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TestActionsCallbackInterfaces.Add(instance);
+            @TestButton1.started += instance.OnTestButton1;
+            @TestButton1.performed += instance.OnTestButton1;
+            @TestButton1.canceled += instance.OnTestButton1;
+            @TestButton2.started += instance.OnTestButton2;
+            @TestButton2.performed += instance.OnTestButton2;
+            @TestButton2.canceled += instance.OnTestButton2;
+            @TestButton3.started += instance.OnTestButton3;
+            @TestButton3.performed += instance.OnTestButton3;
+            @TestButton3.canceled += instance.OnTestButton3;
+            @TestButton4.started += instance.OnTestButton4;
+            @TestButton4.performed += instance.OnTestButton4;
+            @TestButton4.canceled += instance.OnTestButton4;
+            @TestButton5.started += instance.OnTestButton5;
+            @TestButton5.performed += instance.OnTestButton5;
+            @TestButton5.canceled += instance.OnTestButton5;
+        }
+
+        private void UnregisterCallbacks(ITestActions instance)
+        {
+            @TestButton1.started -= instance.OnTestButton1;
+            @TestButton1.performed -= instance.OnTestButton1;
+            @TestButton1.canceled -= instance.OnTestButton1;
+            @TestButton2.started -= instance.OnTestButton2;
+            @TestButton2.performed -= instance.OnTestButton2;
+            @TestButton2.canceled -= instance.OnTestButton2;
+            @TestButton3.started -= instance.OnTestButton3;
+            @TestButton3.performed -= instance.OnTestButton3;
+            @TestButton3.canceled -= instance.OnTestButton3;
+            @TestButton4.started -= instance.OnTestButton4;
+            @TestButton4.performed -= instance.OnTestButton4;
+            @TestButton4.canceled -= instance.OnTestButton4;
+            @TestButton5.started -= instance.OnTestButton5;
+            @TestButton5.performed -= instance.OnTestButton5;
+            @TestButton5.canceled -= instance.OnTestButton5;
+        }
+
+        public void RemoveCallbacks(ITestActions instance)
+        {
+            if (m_Wrapper.m_TestActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITestActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TestActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TestActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TestActions @Test => new TestActions(this);
     private int m_KMSchemeIndex = -1;
     public InputControlScheme KMScheme
     {
@@ -228,5 +399,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMoveBar(InputAction.CallbackContext context);
+    }
+    public interface ITestActions
+    {
+        void OnTestButton1(InputAction.CallbackContext context);
+        void OnTestButton2(InputAction.CallbackContext context);
+        void OnTestButton3(InputAction.CallbackContext context);
+        void OnTestButton4(InputAction.CallbackContext context);
+        void OnTestButton5(InputAction.CallbackContext context);
     }
 }
