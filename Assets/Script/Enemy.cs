@@ -17,8 +17,17 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Action action;
     Vector2 dir;
+    public Vector2 CalResult;
+
+    int ability1;
+    int ability2;
+
+    CircleCollider2D circleCollider;
 
     Vector2 difalutPos;
+
+    float Blocklngth = 3;
+
 
     dificalty dificalty = dificalty.easy;
     public dificalty Dificalty
@@ -30,17 +39,6 @@ public class Enemy : MonoBehaviour
         set
         {
             dificalty = value;
-            switch (dificalty)
-            {
-                case dificalty.easy:
-                    break;
-                case dificalty.middle:
-                    break;
-                case dificalty.hard:
-                    break;
-                default:
-                    break;
-            }
         }
     }
     public float hp;
@@ -145,6 +143,7 @@ public class Enemy : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
+        patternSellect();
     }
 
     void EasyMode()
@@ -159,6 +158,51 @@ public class Enemy : MonoBehaviour
     {
         speed = 15;
     }
+    void patternSellect()
+    {
+        GetAbility();
+        switch (dificalty)
+        {
+            case dificalty.easy:
+                EasyMode();
+                break;
+            case dificalty.middle:
+                middelMode();
+                break;
+            case dificalty.hard:
+                HardMode();
+                break;
+            default:
+                break;
+        }
+    }
+    void GetAbility()
+    {
+        ability1 = UnityEngine.Random.Range(0, 5);
+        ability1 = UnityEngine.Random.Range(0, 5);
+    }
+
+    //플레이어를 잠시 따라다니는 함수
+    void PlayerFallow()
+    {
+        dir = gameManager.Player.transform.position.normalized;
+    }
+
+    void ReadCorce()
+    {
+        dir = gameManager.Player.ReadWayPoint;
+    }
+
+    void ZigZag()
+    {
+        dir.x = Mathf.Cos(Time.deltaTime);
+    }
+
+    void AvoidBullet()
+    {
+
+    }
+
 }
 
 //플레이어가 공을 때리기 전까지는 가운데에서 대기하다가 플레이어가 공을 치는 순간 공의 움직임을 읽고 가서 대기한다.

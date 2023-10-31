@@ -68,27 +68,44 @@ public class GameManager : MonoBehaviour
         SerchTheBalls += ballSerch;
 
     }
+
+    /// <summary>
+    /// 시간 카운트용 델리게이트
+    /// </summary>
     private void Update()
     {
         timecountAction();
     }
 
+    /// <summary>
+    /// 게임이 시작되는 타이밍에 카운트 함수를 델리게이트에 연결할 함수
+    /// </summary>
     void StartCount()
     {
         timecountAction += countTime;
     }
 
+    /// <summary>
+    /// update델리게이트에서 구동될 시간 카운터
+    /// </summary>
     void countTime()
     {
         timeCount += Time.deltaTime;
     }
 
+    /// <summary>
+    /// 시간 카운트 초기화
+    /// </summary>
     void ResetTime()
     {
         GameStart -= StartCount;
         timeCount = 0;
         GameBallSpeed = 5;
     }
+
+    /// <summary>
+    /// 공을 찾고 공이 하나도 없으면 중앙에서 새로 생성한다.
+    /// </summary>
     void ballSerch()
     {
         if(GameHasBeenStarted)
@@ -102,6 +119,10 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    /// <summary>
+    /// 게임 플레이를 시작할때 필요한 초기화
+    /// </summary>
     void PlayActivate()
     {
         GameHasBeenStarted = true;
@@ -110,6 +131,10 @@ public class GameManager : MonoBehaviour
         Enemy.Dificalty = this.Dificalty;
         ballSerch();
     }
+    /// <summary>
+    /// 게임 플레이를 끝낼때 필요한 초기화
+    /// </summary>
+    /// <param name="type"></param>
     void EndActivate(bool type)
     {
         GameHasBeenStarted = false;

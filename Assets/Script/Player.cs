@@ -12,8 +12,14 @@ public class Player : MonoBehaviour
     PlayerInput input;
     Rigidbody2D rb;
     Action action;
-    Vector2 dir;
 
+    public Action PlayerHit;
+
+
+
+    Vector2 dir;
+    public Vector2 hitpoint;
+    public Vector2 ReadWayPoint;
     Vector2 difalutPos;
 
     public float hp;
@@ -32,6 +38,10 @@ public class Player : MonoBehaviour
                 if (hp > 500)
                 {
                     hp = 500;
+                }
+                if (hp < 0)
+                {
+                    GameManager.Inst.GameOver?.Invoke(false);
                 }
                 this.transform.localScale = this.transform.localScale + (Vector3.right * (hp - copyhp) * 0.01f);
             }
@@ -124,10 +134,13 @@ public class Player : MonoBehaviour
         //공에 부딫힐 경우 부딫힌 위치에 따라서 공이 움직이게 된다.근데 지금 왼쪽 가셍이로 치면 칠수록 속도가 빨라진다.(내비 둘 예정)
         if (collision.transform.CompareTag("Ball"))
         {
+            PlayerHit?.Invoke();
             ContactPoint2D contact = collision.contacts[0];
+            hitpoint = contact.point;
             Ball ball = collision.gameObject.GetComponent<Ball>();
-            float xGage = (contact.point.x - this.transform.position.x)* hitAngle;
+            float xGage = (contact.point.x - this.transform.position.x) * hitAngle;
             ball.Dir = new Vector2(xGage, -ball.Dir.y);
+            ReadWayPoint = ball.Dir;
         }
     }
 
@@ -138,8 +151,14 @@ public class Player : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
-        this.skill[0] = gameManager.Skill[0];
-        this.skill[1] = gameManager.Skill[1];
+        if (GameManager.Inst.Skill[0] != null)
+        {
+            this.skill[0] = GameManager.Inst.Skill[0];
+        }
+        if (GameManager.Inst.Skill[1] != null)
+        {
+            this.skill[1] = GameManager.Inst.Skill[1];
+        }
     }
 
     void resetPos()

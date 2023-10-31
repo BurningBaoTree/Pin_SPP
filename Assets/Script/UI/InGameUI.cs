@@ -14,10 +14,22 @@ public class InGameUI : MonoBehaviour
         if (GameManager.Inst.sprites[0] != null)
         {
             image.sprite = GameManager.Inst.sprites[0];
+            image.color = Color.white;
         }
-        else if (GameManager.Inst.sprites[1] != null)
+        else
+        {
+            image.sprite = null;
+            image.color = Color.clear;
+        }
+        if (GameManager.Inst.sprites[1] != null)
         {
             image1.sprite = GameManager.Inst.sprites[1];
+            image1.color = Color.white;
+        }
+        else
+        {
+            image1.sprite = null;
+            image1.color= Color.clear;
         }
     }
     private void Start()

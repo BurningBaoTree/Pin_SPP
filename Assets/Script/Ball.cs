@@ -13,6 +13,8 @@ public class Ball : MonoBehaviour
     Rigidbody2D rb;
     public float speed;
 
+    public bool BulletMod = false;
+    public bool PlayerBullet = false;
 
     /// <summary>
     /// 방향 변수(프로퍼티로 방향이 바뀔때 리지디 바디에 방향을 입력시켜서 움직이게 한다.)
@@ -46,6 +48,21 @@ public class Ball : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        ///총알 상태일때 데미지가 3배!
+        if (BulletMod)
+        {
+            if (collision.collider.CompareTag("Player") && !PlayerBullet)
+            {
+                GameManager.Inst.Player.HP -= 15;
+                Destroy(gameObject);
+            }
+            if (collision.collider.CompareTag("Enemy") && PlayerBullet)
+            {
+                GameManager.Inst.Enemy.HP -= 15;
+                Destroy(gameObject);
+            }
+        }
+
         ///벽에 부딫힌 경우 반사
         if (collision.collider.CompareTag("Wall"))
         {
@@ -59,15 +76,13 @@ public class Ball : MonoBehaviour
             ContactPoint2D contact = collision.contacts[0];
             if (contact.point.y > 0)
             {
-                GameManager.Inst.Enemy.HP -= 10;
-                GameManager.Inst.SerchTheBalls?.Invoke();
+                GameManager.Inst.Enemy.HP -= 5;
                 Destroy(gameObject);
             }
             else
             {
-                GameManager.Inst.Player.HP -= 10;
-                ReSetBall();
-                moveActive();
+                GameManager.Inst.Player.HP -= 5;
+                Destroy(gameObject);
             }
         }
     }

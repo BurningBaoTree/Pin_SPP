@@ -21,7 +21,7 @@ public class GameStart : MonoBehaviour
     private void OnEnable()
     {
         skillS1.sprite = null;
-        skillS1.color = Color.clear; 
+        skillS1.color = Color.clear;
         skillS2.sprite = null;
         skillS2.color = Color.clear;
     }
@@ -53,20 +53,29 @@ public class GameStart : MonoBehaviour
         GameManager.Inst.GameStart?.Invoke();
         this.gameObject.SetActive(false);
     }
-    public void SkillSellect(Sprite sprite, SkillBase skill)
+    public void SkillSellect(Sprite sprite)
     {
-        if(skillS1.sprite == null)
+        if (skillS1.sprite == null)
         {
             skillS1.sprite = sprite;
             GameManager.Inst.sprites[0] = sprite;
             skillS1.color = Color.white;
-            GameManager.Inst.Skill[0] = skill;
         }
         else if (skillS2.sprite == null)
         {
             skillS2.sprite = sprite;
             GameManager.Inst.sprites[1] = sprite;
             skillS2.color = Color.white;
+        }
+    }
+    public void SkillUpLoad(SkillBase skill)
+    {
+        if (GameManager.Inst.Skill[0] == null)
+        {
+            GameManager.Inst.Skill[0] = skill;
+        }
+        else if (GameManager.Inst.Skill[1] == null)
+        {
             GameManager.Inst.Skill[1] = skill;
         }
     }

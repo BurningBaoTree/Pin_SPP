@@ -7,14 +7,16 @@ TagManager:
   - DeadZone
   - Wall
   - Ball
+  - Reader
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Reader
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 
