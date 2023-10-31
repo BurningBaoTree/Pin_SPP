@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElieBall : MonoBehaviour
+public class ElieBall : SkillBase
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Activeate()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Activeate();
     }
 }

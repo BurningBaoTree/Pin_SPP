@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum dificalty
@@ -12,15 +13,36 @@ public enum dificalty
 
 public class Enemy : MonoBehaviour
 {
-
+    GameManager gameManager;
     Rigidbody2D rb;
     Action action;
     Vector2 dir;
 
     Vector2 difalutPos;
 
-    public dificalty dificalty = dificalty.easy;
-
+    dificalty dificalty = dificalty.easy;
+    public dificalty Dificalty
+    {
+        get
+        {
+            return dificalty;
+        }
+        set
+        {
+            dificalty = value;
+            switch (dificalty)
+            {
+                case dificalty.easy:
+                    break;
+                case dificalty.middle:
+                    break;
+                case dificalty.hard:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     public float hp;
     public float HP
     {
@@ -40,7 +62,6 @@ public class Enemy : MonoBehaviour
                 }
                 if (hp < 0)
                 {
-                    Time.timeScale = 0;
                     GameManager.Inst.GameOver?.Invoke(true);
                 }
                 this.transform.localScale = this.transform.localScale + (Vector3.right * (hp - copyhp) * 0.01f);
@@ -80,11 +101,19 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
+        action += () => { };
     }
     private void OnEnable()
     {
-        action += () => { };
         initialize();
+    }
+    private void OnDisable()
+    {
+        Dificalty = dificalty.easy;
+    }
+    private void Start()
+    {
+        gameManager = GameManager.Inst;
     }
     private void Update()
     {
@@ -116,6 +145,19 @@ public class Enemy : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
+    }
+
+    void EasyMode()
+    {
+        speed = 5;
+    }
+    void middelMode()
+    {
+        speed = 10;
+    }
+    void HardMode()
+    {
+        speed = 15;
     }
 }
 

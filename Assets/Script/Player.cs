@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    GameManager gameManager;
+
+    public SkillBase[] skill = new SkillBase[2];
+
     PlayerInput input;
     Rigidbody2D rb;
     Action action;
@@ -37,6 +41,9 @@ public class Player : MonoBehaviour
     public float speed;
     public float hitAngle;
 
+    /// <summary>
+    /// 움직일수 있는지 없는지 체크하는 bool 변수(프로퍼티로 움직일수 없을때 물리값 초기화)
+    /// </summary>
     bool move;
     bool Move
     {
@@ -66,13 +73,13 @@ public class Player : MonoBehaviour
         input = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
+        action += () => { };
     }
     private void OnEnable()
     {
         input.Enable();
         input.Player.moveBar.performed += MoveBar;
         input.Player.moveBar.canceled += MoveBar;
-        action += () => { };
         initialize();
     }
     private void OnDisable()
@@ -80,6 +87,10 @@ public class Player : MonoBehaviour
         input.Player.moveBar.canceled -= MoveBar;
         input.Player.moveBar.performed -= MoveBar;
         input.Disable();
+    }
+    private void Start()
+    {
+        gameManager = GameManager.Inst;
     }
     private void Update()
     {
@@ -104,6 +115,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //벽에 부딫히면 움직일수 없다.
         if (collision.transform.CompareTag("Wall"))
         {
             Move = false;
@@ -126,7 +138,13 @@ public class Player : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
+        this.skill[0] = gameManager.Skill[0];
+        this.skill[1] = gameManager.Skill[1];
     }
 
+    void resetPos()
+    {
+
+    }
 
 }
