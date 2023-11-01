@@ -134,13 +134,13 @@ public class Player : MonoBehaviour
         //공에 부딫힐 경우 부딫힌 위치에 따라서 공이 움직이게 된다.근데 지금 왼쪽 가셍이로 치면 칠수록 속도가 빨라진다.(내비 둘 예정)
         if (collision.transform.CompareTag("Ball"))
         {
-            PlayerHit?.Invoke();
             ContactPoint2D contact = collision.contacts[0];
             hitpoint = contact.point;
             Ball ball = collision.gameObject.GetComponent<Ball>();
             float xGage = (contact.point.x - this.transform.position.x) * hitAngle;
             ball.Dir = new Vector2(xGage, -ball.Dir.y);
             ReadWayPoint = ball.Dir;
+            PlayerHit?.Invoke();
         }
     }
 

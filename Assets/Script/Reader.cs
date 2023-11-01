@@ -33,16 +33,6 @@ public class Reader : MonoBehaviour
         GameManager.Inst.Player.PlayerHit += Calculate;
         this.gameObject.SetActive(false);
     }
-    void Calculate()
-    {
-        Dir = GameManager.Inst.Player.ReadWayPoint;
-        this.transform.position = GameManager.Inst.Player.hitpoint;
-        rb.velocity = Dir * speed;
-    }
-    void calculateComplit(Vector2 dir)
-    {
-        GameManager.Inst.Enemy.CalResult = dir;
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Reader"))
@@ -60,5 +50,15 @@ public class Reader : MonoBehaviour
             Vector2 reflection = Vector2.Reflect(Dir, collision.contacts[0].normal);
             Dir = reflection;
         }
+    }
+    void Calculate()
+    {
+        Dir = GameManager.Inst.Player.ReadWayPoint;
+        this.transform.position = GameManager.Inst.Player.hitpoint;
+        rb.velocity = Dir * speed;
+    }
+    void calculateComplit(Vector2 dir)
+    {
+        GameManager.Inst.Enemy.CalResult = dir;
     }
 }

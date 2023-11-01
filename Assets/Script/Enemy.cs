@@ -108,6 +108,7 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         Dificalty = dificalty.easy;
+        action = () => { };
     }
     private void Start()
     {
@@ -157,6 +158,7 @@ public class Enemy : MonoBehaviour
     void HardMode()
     {
         speed = 15;
+        action += ReadCorce;
     }
     void patternSellect()
     {
@@ -190,7 +192,8 @@ public class Enemy : MonoBehaviour
 
     void ReadCorce()
     {
-        dir = gameManager.Player.ReadWayPoint;
+        dir = CalResult;
+        Move = true;
     }
 
     void ZigZag()
