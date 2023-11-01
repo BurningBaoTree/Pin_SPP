@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    CoolTimeSys timeSys;
 
     public Player Player;
     public Enemy Enemy;
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
     public Action SerchTheBalls;
 
     Action timecountAction;
+    Action updater;
 
     public float timeCount = 0;
     public float GameBallSpeed = 5;
@@ -57,16 +59,23 @@ public class GameManager : MonoBehaviour
     public Sprite[] sprites = new Sprite[2];
     public SkillBase[] Skill = new SkillBase[2];
 
+    PoolManager pooler;
+
     private void Awake()
     {
         instance = this;
         timecountAction = () => { };
+        updater = () => { };    
         GameStart += StartCount;
         GameStart += PlayActivate;
         GameOver += EndActivate;
         ResetTheGame += ResetTime;
         SerchTheBalls += ballSerch;
-
+        timeSys = GetComponent<CoolTimeSys>();
+    }
+    private void Start()
+    {
+        pooler = PoolManager.Inst;
     }
 
     /// <summary>
@@ -75,6 +84,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         timecountAction();
+        updater();
     }
 
     /// <summary>
@@ -108,15 +118,31 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void ballSerch()
     {
-        if(GameHasBeenStarted)
+        bool ballcheck = false;
+        if (GameHasBeenStarted)
         {
-            //배열로 공들을 찾고
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("Ball");
-            // 공이 없으면 실행
-            if (objects.Length == 0)
+            foreach (GameObject obj in pooler.pools[0].PooledObjectList)
             {
-                Instantiate(Ball, Vector3.zero, Quaternion.identity);
+                if (obj.activeSelf)
+                {
+                    //공이 있다.
+                    ballcheck = true;
+                    break;
+                }
             }
+            if (!ballcheck)
+            {
+                timeSys.CoolTimeStart(0, 0.5f);
+                updater += WaitForTheBall;
+            }
+        }
+    }
+    void WaitForTheBall()
+    {
+        if (timeSys.coolclocks[0].coolEnd)
+        {
+            pooler.SpawnObject(0, Vector3.zero);
+            updater -= WaitForTheBall;
         }
     }
 

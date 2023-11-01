@@ -20,7 +20,7 @@ public class Reader : MonoBehaviour
             }
         }
     }
-    float speed = 25f;
+    float speed = 8f;
     Rigidbody2D rb;
     private void Start()
     {

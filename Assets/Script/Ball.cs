@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public GameManager gamemana;
 
     public Color PlayerColor;
     public Color EnemyColor;
@@ -15,6 +16,8 @@ public class Ball : MonoBehaviour
 
     public bool BulletMod = false;
     public bool PlayerBullet = false;
+
+    int notFirstTime = 0;
 
     /// <summary>
     /// 방향 변수(프로퍼티로 방향이 바뀔때 리지디 바디에 방향을 입력시켜서 움직이게 한다.)
@@ -41,10 +44,31 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sp = GetComponent<SpriteRenderer>();
     }
+    private void OnEnable()
+    {
+        if (gamemana == null && notFirstTime != 0)
+        {
+            gamemana = GameManager.Inst;
+            BallSpeedSel();
+            moveActive();
+        }
+        else if (gamemana != null)
+        {
+            BallSpeedSel();
+            moveActive();
+        }
+        notFirstTime++;
+    }
     private void Start()
     {
-        BallSpeedSel();
-        moveActive();
+        gamemana = GameManager.Inst;
+    }
+    void OnDisable()
+    {
+        if (gamemana != null && gamemana.GameHasBeenStarted)
+        {
+            gamemana.SerchTheBalls?.Invoke();
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -53,13 +77,13 @@ public class Ball : MonoBehaviour
         {
             if (collision.collider.CompareTag("Player") && !PlayerBullet)
             {
-                GameManager.Inst.Player.HP -= 15;
-                Destroy(gameObject);
+                gamemana.Player.HP -= 15;
+                this.gameObject.SetActive(false);
             }
             if (collision.collider.CompareTag("Enemy") && PlayerBullet)
             {
-                GameManager.Inst.Enemy.HP -= 15;
-                Destroy(gameObject);
+                gamemana.Enemy.HP -= 15;
+                this.gameObject.SetActive(false);
             }
         }
 
@@ -76,19 +100,15 @@ public class Ball : MonoBehaviour
             ContactPoint2D contact = collision.contacts[0];
             if (contact.point.y > 0)
             {
-                GameManager.Inst.Enemy.HP -= 5;
-                Destroy(gameObject);
+                gamemana.Enemy.HP -= 5;
+                this.gameObject.SetActive(false);
             }
             else
             {
-                GameManager.Inst.Player.HP -= 5;
-                Destroy(gameObject);
+                gamemana.Player.HP -= 5;
+                this.gameObject.SetActive(false);
             }
         }
-    }
-    private void OnDestroy()
-    {
-        GameManager.Inst.SerchTheBalls?.Invoke();
     }
     /// <summary>
     /// 시작할때 공을 아래로 움직이는 함수
@@ -113,7 +133,7 @@ public class Ball : MonoBehaviour
     /// </summary>
     void BallSpeedSel()
     {
-        speed = GameManager.Inst.GameBallSpeed;
+        speed = gamemana.GameBallSpeed;
     }
 }
 //공이 색갈이 변하는데, 그 경우 적이나 플레이어가 치면 HP가 감소한다.
