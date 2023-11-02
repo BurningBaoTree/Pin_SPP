@@ -20,7 +20,7 @@ public class Reader : MonoBehaviour
             }
         }
     }
-    float speed = 8f;
+    float speed = 5f;
     Rigidbody2D rb;
     private void Start()
     {
@@ -53,6 +53,7 @@ public class Reader : MonoBehaviour
     }
     void Calculate()
     {
+        rb.velocity = Vector3.zero;
         Dir = GameManager.Inst.Player.ReadWayPoint;
         this.transform.position = GameManager.Inst.Player.hitpoint;
         rb.velocity = Dir * speed;

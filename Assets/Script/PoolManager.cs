@@ -60,7 +60,7 @@ public class PoolManager : MonoBehaviour
         /// Pool 확장 함수 (1개씩 증가)
         /// </summary>
         /// <returns>확장하고 난 풀의 GameObject 반환</returns>
-        private GameObject ExtendBallPoolSize()
+        private GameObject ExtendPoolSize()
         {
             size++;
             GameObject AddObject = Instantiate(prefab, poolParent);
@@ -92,7 +92,7 @@ public class PoolManager : MonoBehaviour
             if (!spawnObject)
             {
                 //풀사이즈 확장 1개만 그리고 그 오브젝트를 spawnObject에 대입
-                spawnObject = ExtendBallPoolSize();
+                spawnObject = ExtendPoolSize();
             }
 
             return spawnObject;

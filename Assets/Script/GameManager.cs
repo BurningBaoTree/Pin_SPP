@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
             }
             if (!ballcheck)
             {
-                timeSys.CoolTimeStart(0, 0.5f);
+                timeSys.CoolTimeStart(0, 2f);
                 updater += WaitForTheBall;
             }
         }

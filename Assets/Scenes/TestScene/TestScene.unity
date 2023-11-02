@@ -796,7 +796,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolClockCount: 1
   coolclocks: []
-  timeCount: 0
 --- !u!1 &1173779975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,7 +1117,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f45eaf775b34d649a3bd8c0d93434bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CalResult: {x: 0, y: 0}
+  cooltime: {fileID: 0}
+  skill:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  dir: {x: 0, y: 0}
+  calResult: {x: 0, y: 0}
   hp: 1
   speed: 10
   hitAngle: 5
@@ -1182,17 +1189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolClockCount: 3
-  coolclocks:
-  - time: 0
-    coolStart: 0
-    coolEnd: 0
-  - time: 0
-    coolStart: 0
-    coolEnd: 0
-  - time: 0
-    coolStart: 0
-    coolEnd: 0
-  timeCount: 0
+  coolclocks: []
 --- !u!58 &1286585391
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1208,7 +1205,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 3
 --- !u!1 &1352014767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1312,7 @@ MonoBehaviour:
   hitpoint: {x: 0, y: 0}
   ReadWayPoint: {x: 0, y: 0}
   hp: 1
-  speed: 10
+  speed: 20
   hitAngle: 5
 --- !u!61 &1352014771
 BoxCollider2D:
@@ -1378,7 +1375,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coolClockCount: 2
   coolclocks: []
-  timeCount: 0
 --- !u!224 &1513411328 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7522215782208230056, guid: b1045415e29f5594b97f052b4d2a87b8, type: 3}

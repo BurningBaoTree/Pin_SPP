@@ -13,11 +13,43 @@ public enum dificalty
 
 public class Enemy : MonoBehaviour
 {
+    public CoolTimeSys cooltime;
+    public SkillBase[] skill;
     GameManager gameManager;
     Rigidbody2D rb;
     Action action;
-    Vector2 dir;
-    public Vector2 CalResult;
+    public Vector2 dir;
+    public Vector2 Dir
+    {
+        get
+        {
+            return dir;
+        }
+        set
+        {
+            if (dir != value)
+            {
+                dir = value;
+                ChangeDirecthion();
+            }
+        }
+    }
+    Vector2 targetPostion;
+    public Vector2 calResult;
+    public Vector2 CalResult
+    {
+        get
+        {
+            return calResult;
+        }
+        set
+        {
+            if (calResult != value)
+            {
+                calResult = value;
+            }
+        }
+    }
 
     int ability1;
     int ability2;
@@ -25,9 +57,6 @@ public class Enemy : MonoBehaviour
     CircleCollider2D circleCollider;
 
     Vector2 difalutPos;
-
-    float Blocklngth = 3;
-
 
     dificalty dificalty = dificalty.easy;
     public dificalty Dificalty
@@ -39,6 +68,7 @@ public class Enemy : MonoBehaviour
         set
         {
             dificalty = value;
+            patternSellect();
         }
     }
     public float hp;
@@ -99,7 +129,8 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
-        action += () => { };
+        cooltime = GetComponent<CoolTimeSys>();
+        circleCollider = GetComponent<CircleCollider2D>();
     }
     private void OnEnable()
     {
@@ -108,7 +139,6 @@ public class Enemy : MonoBehaviour
     private void OnDisable()
     {
         Dificalty = dificalty.easy;
-        action = () => { };
     }
     private void Start()
     {
@@ -120,7 +150,12 @@ public class Enemy : MonoBehaviour
     }
     void moveActive()
     {
-        rb.AddForce(dir * speed, ForceMode2D.Impulse);
+        transform.transform.position = Vector2.MoveTowards(transform.position, targetPostion, Time.deltaTime * speed);
+    }
+    void ChangeDirecthion()
+    {
+        targetPostion = new Vector2(Dir.x, 4);
+        Move = true;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -136,7 +171,6 @@ public class Enemy : MonoBehaviour
             ball.Dir = new Vector2(xGage, -ball.Dir.y);
         }
     }
-
     /// <summary>
     /// 초기화용 함수
     /// </summary>
@@ -144,26 +178,29 @@ public class Enemy : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
-        patternSellect();
+        circleCollider.radius = 3;
+        action = () => { };
     }
 
     void EasyMode()
     {
-        speed = 5;
+        speed = 7;
+        action += ReadCorce;
     }
     void middelMode()
     {
-        speed = 10;
+        speed = 15;
+        action += ReadCorce;
     }
     void HardMode()
     {
-        speed = 15;
+        speed = 18;
         action += ReadCorce;
     }
     void patternSellect()
     {
         GetAbility();
-        switch (dificalty)
+        switch (Dificalty)
         {
             case dificalty.easy:
                 EasyMode();
@@ -178,6 +215,7 @@ public class Enemy : MonoBehaviour
                 break;
         }
     }
+
     void GetAbility()
     {
         ability1 = UnityEngine.Random.Range(0, 5);
@@ -187,18 +225,21 @@ public class Enemy : MonoBehaviour
     //플레이어를 잠시 따라다니는 함수
     void PlayerFallow()
     {
-        dir = gameManager.Player.transform.position.normalized;
+         Dir = gameManager.Player.transform.position;
     }
 
     void ReadCorce()
     {
-        dir = CalResult;
-        Move = true;
+        Dir = CalResult;
     }
 
     void ZigZag()
     {
-        dir.x = Mathf.Cos(Time.deltaTime);
+        Dir = Vector2.right * (Mathf.Cos(Time.deltaTime));
+        if (cooltime.coolclocks[1].coolEnd)
+        {
+            action -= ZigZag;
+        }
     }
 
     void AvoidBullet()

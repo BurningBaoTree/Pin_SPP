@@ -99,9 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc61631fad7eefd4d89f26a74f0083f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamemana: {fileID: 0}
   PlayerColor: {r: 0, g: 0.36078432, b: 1, a: 0}
   EnemyColor: {r: 1, g: 0, b: 0, a: 0}
   speed: 5
+  BulletMod: 0
+  PlayerBullet: 0
 --- !u!58 &8649490922865447184
 CircleCollider2D:
   m_ObjectHideFlags: 0

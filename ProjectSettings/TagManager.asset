@@ -9,6 +9,8 @@ TagManager:
   - Ball
   - Reader
   - Enemy
+  - EnemyBall
+  - PlayerBall
   layers:
   - Default
   - TransparentFX
