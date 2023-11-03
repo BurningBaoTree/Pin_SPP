@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8649490922865447185}
   - component: {fileID: 8649490922865447184}
   - component: {fileID: 8649490922865447187}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -105,6 +105,7 @@ MonoBehaviour:
   speed: 5
   BulletMod: 0
   PlayerBullet: 0
+  AddedBall: 0
 --- !u!58 &8649490922865447184
 CircleCollider2D:
   m_ObjectHideFlags: 0

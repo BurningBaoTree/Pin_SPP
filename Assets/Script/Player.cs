@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     public Action PlayerHit;
 
-
+    CoolTimeSys timer;
 
     Vector2 dir;
     public Vector2 hitpoint;
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
                 }
                 if (hp < 0)
                 {
-                    GameManager.Inst.GameOver?.Invoke(false);
+                    gameManager.GameOver?.Invoke(false);
                 }
                 this.transform.localScale = this.transform.localScale + (Vector3.right * (hp - copyhp) * 0.01f);
             }
@@ -84,19 +84,27 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
         action += () => { };
+        timer = GetComponent<CoolTimeSys>();
     }
     private void OnEnable()
     {
         input.Enable();
         input.Player.moveBar.performed += MoveBar;
         input.Player.moveBar.canceled += MoveBar;
+        input.Player.SkillAction.performed += SkillAction_performed;
+        input.Player.SkillAction1.performed += SkillAction_performed1;
         initialize();
     }
+
     private void OnDisable()
     {
+        input.Player.SkillAction1.performed -= SkillAction_performed1;
+        input.Player.SkillAction.performed -= SkillAction_performed;
         input.Player.moveBar.canceled -= MoveBar;
         input.Player.moveBar.performed -= MoveBar;
         input.Disable();
+        skill[0] = null;
+        skill[1] = null;
     }
     private void Start()
     {
@@ -151,19 +159,29 @@ public class Player : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
-        if (GameManager.Inst.Skill[0] != null)
-        {
-            this.skill[0] = GameManager.Inst.Skill[0];
-        }
-        if (GameManager.Inst.Skill[1] != null)
-        {
-            this.skill[1] = GameManager.Inst.Skill[1];
-        }
     }
 
     void resetPos()
     {
 
+    }
+
+    private void SkillAction_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        if (timer.coolclocks[0].coolEnd && skill[0] != null)
+        {
+            skill[0].Activeate(WhosActive.Player);
+            timer.CoolTimeStart(0, skill[0].coolTime);
+        }
+    }
+
+    private void SkillAction_performed1(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (timer.coolclocks[1].coolEnd && skill[1] != null)
+        {
+            skill[1].Activeate(WhosActive.Player);
+            timer.CoolTimeStart(1, skill[1].coolTime);
+        }
     }
 
 }

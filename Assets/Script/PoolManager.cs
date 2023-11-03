@@ -74,7 +74,7 @@ public class PoolManager : MonoBehaviour
         /// BallPool에서 비활성화된 Ball 가져오기
         /// </summary>
         /// <returns>현재 List에서 비활성화가 된 Ball (null 리턴시 풀에 남아있는 비활성화 오브젝트 없음)</returns>
-        public GameObject SpawnObject()
+        public GameObject SpawnObjectin()
         {
             GameObject spawnObject = null;
 
@@ -119,7 +119,7 @@ public class PoolManager : MonoBehaviour
     {
         if (spawnIndex < pools.Count)
         {
-            GameObject spawnobj = pools[spawnIndex].SpawnObject();
+            GameObject spawnobj = pools[spawnIndex].SpawnObjectin();
             spawnobj.gameObject.transform.position = spawnPos;
             spawnobj.gameObject.SetActive(true);
         }
@@ -128,5 +128,19 @@ public class PoolManager : MonoBehaviour
             Debug.Log("존재하지 않는 Index");
         }
     }
-
+    public GameObject SpawnObjectinject(int spawnIndex, Vector3 spawnPos)
+    {
+        if (spawnIndex < pools.Count)
+        {
+            GameObject spawnobj = pools[spawnIndex].SpawnObjectin();
+            spawnobj.gameObject.transform.position = spawnPos;
+            spawnobj.gameObject.SetActive(true);
+            return spawnobj;
+        }
+        else
+        {
+            Debug.Log("존재하지 않는 Index");
+            return null;
+        }
+    }
 }

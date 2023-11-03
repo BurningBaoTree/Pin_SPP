@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ElieBall : SkillBase
 {
-    protected override void Activeate()
+    public override void Activeate(WhosActive whos)
     {
-        base.Activeate();
     }
 }

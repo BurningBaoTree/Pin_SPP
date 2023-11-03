@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 {
     public CoolTimeSys cooltime;
     public SkillBase[] skill;
+    SkillBase[] usingSckill;
     GameManager gameManager;
     Rigidbody2D rb;
     Action action;
@@ -53,8 +54,6 @@ public class Enemy : MonoBehaviour
 
     int ability1;
     int ability2;
-
-    CircleCollider2D circleCollider;
 
     Vector2 difalutPos;
 
@@ -130,7 +129,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
         cooltime = GetComponent<CoolTimeSys>();
-        circleCollider = GetComponent<CircleCollider2D>();
+        usingSckill = new SkillBase[2];
     }
     private void OnEnable()
     {
@@ -178,7 +177,6 @@ public class Enemy : MonoBehaviour
     {
         HP = 100;
         this.transform.position = difalutPos;
-        circleCollider.radius = 3;
         action = () => { };
     }
 
@@ -189,7 +187,7 @@ public class Enemy : MonoBehaviour
     }
     void middelMode()
     {
-        speed = 15;
+        speed = 12;
         action += ReadCorce;
     }
     void HardMode()
@@ -219,13 +217,15 @@ public class Enemy : MonoBehaviour
     void GetAbility()
     {
         ability1 = UnityEngine.Random.Range(0, 5);
-        ability1 = UnityEngine.Random.Range(0, 5);
+        ability2 = UnityEngine.Random.Range(0, 5);
+        usingSckill[0] = skill[ability1];
+        usingSckill[1] = skill[ability2];
     }
 
     //플레이어를 잠시 따라다니는 함수
     void PlayerFallow()
     {
-         Dir = gameManager.Player.transform.position;
+        Dir = gameManager.Player.transform.position;
     }
 
     void ReadCorce()
@@ -233,20 +233,32 @@ public class Enemy : MonoBehaviour
         Dir = CalResult;
     }
 
-    void ZigZag()
-    {
-        Dir = Vector2.right * (Mathf.Cos(Time.deltaTime));
-        if (cooltime.coolclocks[1].coolEnd)
+    /*    void ZigZag()
         {
-            action -= ZigZag;
-        }
-    }
+            Dir = Vector2.right * (Mathf.Cos(Time.deltaTime));
+            if (cooltime.coolclocks[1].coolEnd)
+            {
+                action -= ZigZag;
+            }
+        }*/
 
     void AvoidBullet()
     {
 
     }
-
+    void usingAbility()
+    {
+        if (cooltime.coolclocks[0].coolEnd)
+        {
+            usingSckill[0].Activeate(WhosActive.Enemy);
+            cooltime.CoolTimeStart(0, usingSckill[0].coolTime);
+        }
+        if (cooltime.coolclocks[1].coolEnd)
+        {
+            usingSckill[1].Activeate(WhosActive.Enemy);
+            cooltime.CoolTimeStart(1, usingSckill[1].coolTime);
+        }
+    }
 }
 
 //플레이어가 공을 때리기 전까지는 가운데에서 대기하다가 플레이어가 공을 치는 순간 공의 움직임을 읽고 가서 대기한다.

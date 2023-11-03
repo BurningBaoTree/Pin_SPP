@@ -37,7 +37,6 @@ public class Reader : MonoBehaviour
     {
         if (collision.CompareTag("Reader"))
         {
-            Debug.Log("계산 완료");
             rb.velocity = Vector3.zero;
             calculateComplit(this.transform.position);
         }

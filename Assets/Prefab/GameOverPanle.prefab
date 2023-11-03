@@ -119,6 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wintext: {fileID: 9045361713407736478}
   Timetext: {fileID: 9045361713303582550}
+  skill1: {fileID: 9045361713217210474}
+  skill2: {fileID: 9045361712886294792}
   timeresult: 0
   mit: 0
   sec: 0

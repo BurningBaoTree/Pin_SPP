@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class Shootball : SkillBase
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Activeate(WhosActive whos)
     {
-        
-    }
+        if ((int)whos == 0)
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }
+        else
+        {
+
+        }
     }
 }

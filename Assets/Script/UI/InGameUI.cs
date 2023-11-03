@@ -8,6 +8,8 @@ public class InGameUI : MonoBehaviour
     public Image image;
     public Image image1;
 
+
+
     private void Start()
     {
         GameManager.Inst.GameStart += () =>

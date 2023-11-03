@@ -50,12 +50,10 @@ public class Ball : MonoBehaviour
         {
             gamemana = GameManager.Inst;
             BallSpeedSel();
-            moveActive();
         }
         else if (gamemana != null)
         {
             BallSpeedSel();
-            moveActive();
         }
         notFirstTime++;
     }
@@ -113,10 +111,17 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// 시작할때 공을 아래로 움직이는 함수
     /// </summary>
-    void moveActive()
+    public void moveActive()
     {
-        rb.velocity = Vector2.down * speed;
         Dir = Vector2.down * speed;
+        rb.velocity = Dir;
+    }
+    public void RanddomwMove()
+    {
+        float x = Random.Range(-1f, 1f);
+        float y = Random.Range(-speed*2, speed*2);
+        Dir = new Vector2(x, y);
+        rb.velocity = Dir;
     }
 
     /// <summary>

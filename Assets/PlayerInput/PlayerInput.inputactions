@@ -13,6 +13,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "SkillAction",
+                    "type": "Button",
+                    "id": "251cdbcd-c45a-49fb-b357-158138f69980",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SkillAction1",
+                    "type": "Button",
+                    "id": "b42162a1-a7f9-4785-8446-6f8ad3dd5c5b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -48,6 +66,28 @@
                     "action": "moveBar",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "3aeee4c3-cc81-4981-9257-d4e840cde6ec",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillAction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0948ab21-c5ef-4bea-bfc3-56a889a1dcd3",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillAction1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

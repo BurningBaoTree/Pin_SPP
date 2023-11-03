@@ -137,11 +137,18 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    void allBallDeactive()
+    {
+
+    }
     void WaitForTheBall()
     {
         if (timeSys.coolclocks[0].coolEnd)
         {
-            pooler.SpawnObject(0, Vector3.zero);
+            GameObject pooledobject = pooler.SpawnObjectinject(0, Vector3.zero);
+            Ball ball = pooledobject.GetComponent<Ball>();
+            ball.moveActive();
             updater -= WaitForTheBall;
         }
     }
@@ -153,6 +160,8 @@ public class GameManager : MonoBehaviour
     {
         GameHasBeenStarted = true;
         Player.gameObject.SetActive(true);
+        Player.skill[0] = this.Skill[0];
+        Player.skill[1] = this.Skill[1];
         Enemy.gameObject.SetActive(true);
         Enemy.Dificalty = this.Dificalty;
         ballSerch();
