@@ -138,9 +138,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void allBallDeactive()
+    void allBallDeActive()
     {
-
+        foreach(GameObject obj in pooler.pools[0].PooledObjectList)
+        {
+            obj.SetActive(false);
+        }
     }
     void WaitForTheBall()
     {
@@ -166,6 +169,7 @@ public class GameManager : MonoBehaviour
         Enemy.Dificalty = this.Dificalty;
         ballSerch();
     }
+
     /// <summary>
     /// 게임 플레이를 끝낼때 필요한 초기화
     /// </summary>
@@ -175,5 +179,6 @@ public class GameManager : MonoBehaviour
         GameHasBeenStarted = false;
         Player.gameObject.SetActive(false);
         Enemy.gameObject.SetActive(false);
+        allBallDeActive();
     }
 }

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     PlayerInput input;
     Rigidbody2D rb;
     Action action;
+    Action FixedAction;
 
     public Action PlayerHit;
 
@@ -68,11 +69,11 @@ public class Player : MonoBehaviour
                 move = value;
                 if (move)
                 {
-                    action += moveActive;
+                    FixedAction += moveActive;
                 }
                 else
                 {
-                    action -= moveActive;
+                    FixedAction -= moveActive;
                     rb.velocity = Vector2.zero;
                 }
             }
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
         action += () => { };
+        FixedAction = () => { };
         timer = GetComponent<CoolTimeSys>();
     }
     private void OnEnable()
@@ -115,6 +117,10 @@ public class Player : MonoBehaviour
         action();
     }
 
+    private void FixedUpdate()
+    {
+        FixedAction();
+    }
     private void MoveBar(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         dir = Vector2.right * context.ReadValue<Vector2>();

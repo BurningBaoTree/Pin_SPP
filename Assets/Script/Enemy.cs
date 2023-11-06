@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     GameManager gameManager;
     Rigidbody2D rb;
     Action action;
+    Action FixedAction;
     public Vector2 dir;
     public Vector2 Dir
     {
@@ -113,11 +114,11 @@ public class Enemy : MonoBehaviour
                 move = value;
                 if (move)
                 {
-                    action += moveActive;
+                    FixedAction += moveActive;
                 }
                 else
                 {
-                    action -= moveActive;
+                    FixedAction -= moveActive;
                     rb.velocity = Vector2.zero;
                 }
             }
@@ -147,9 +148,13 @@ public class Enemy : MonoBehaviour
     {
         action();
     }
+    private void FixedUpdate()
+    {
+        FixedAction();
+    }
     void moveActive()
     {
-        transform.transform.position = Vector2.MoveTowards(transform.position, targetPostion, Time.deltaTime * speed);
+        transform.transform.position = Vector2.MoveTowards(transform.position, targetPostion, Time.fixedDeltaTime * speed);
     }
     void ChangeDirecthion()
     {
@@ -178,6 +183,7 @@ public class Enemy : MonoBehaviour
         HP = 100;
         this.transform.position = difalutPos;
         action = () => { };
+        FixedAction = () => { };
     }
 
     void EasyMode()
@@ -208,8 +214,6 @@ public class Enemy : MonoBehaviour
                 break;
             case dificalty.hard:
                 HardMode();
-                break;
-            default:
                 break;
         }
     }
