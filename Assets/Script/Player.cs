@@ -8,11 +8,18 @@ public class Player : MonoBehaviour
     GameManager gameManager;
 
     public SkillBase[] skill = new SkillBase[2];
+    public Color NormalColor;
+    public Color SlowColor;
+
+    SpriteRenderer sp;
 
     PlayerInput input;
     Rigidbody2D rb;
     Action action;
     Action FixedAction;
+
+    public Action<float> SkillUsed1;
+    public Action<float> SkillUsed2;
 
     public Action PlayerHit;
 
@@ -81,6 +88,7 @@ public class Player : MonoBehaviour
     }
     private void Awake()
     {
+        sp = GetComponent<SpriteRenderer>();
         input = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
@@ -176,6 +184,7 @@ public class Player : MonoBehaviour
     {
         if (timer.coolclocks[0].coolEnd && skill[0] != null)
         {
+            SkillUsed1?.Invoke(skill[0].coolTime);
             skill[0].Activeate(WhosActive.Player);
             timer.CoolTimeStart(0, skill[0].coolTime);
         }
@@ -185,9 +194,25 @@ public class Player : MonoBehaviour
     {
         if (timer.coolclocks[1].coolEnd && skill[1] != null)
         {
+            SkillUsed2?.Invoke(skill[1].coolTime);
             skill[1].Activeate(WhosActive.Player);
             timer.CoolTimeStart(1, skill[1].coolTime);
         }
     }
-
+    public void SlowDebuff()
+    {
+        speed *= 0.2f;
+        timer.CoolTimeStart(2, 5f);
+        action += BackToNormal;
+        sp.color = SlowColor;
+    }
+    void BackToNormal()
+    {
+        if (timer.coolclocks[2].coolEnd)
+        {
+            speed *= 5f;
+            sp.color = NormalColor;
+            action -= BackToNormal;
+        }
+    }
 }

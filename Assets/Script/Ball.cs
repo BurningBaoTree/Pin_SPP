@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour
 
     public Color PlayerColor;
     public Color EnemyColor;
-    SpriteRenderer sp;
+    public SpriteRenderer sp;
 
     Rigidbody2D rb;
     public float speed;
@@ -67,6 +67,9 @@ public class Ball : MonoBehaviour
         {
             gamemana.SerchTheBalls?.Invoke();
         }
+        sp.color = Color.white;
+        BulletMod = false;
+        PlayerBullet = false;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -76,12 +79,10 @@ public class Ball : MonoBehaviour
             if (collision.collider.CompareTag("Player") && !PlayerBullet)
             {
                 gamemana.Player.HP -= 15;
-                this.gameObject.SetActive(false);
             }
             if (collision.collider.CompareTag("Enemy") && PlayerBullet)
             {
                 gamemana.Enemy.HP -= 15;
-                this.gameObject.SetActive(false);
             }
         }
 
@@ -118,8 +119,8 @@ public class Ball : MonoBehaviour
     }
     public void RanddomwMove()
     {
-        float x = Random.Range(-1f, 1f);
-        float y = Random.Range(-speed*2, speed*2);
+        float x = Random.Range(-0.5f, 0.5f);
+        float y = Random.Range(-speed * 2, speed * 2);
         Dir = new Vector2(x, y);
         rb.velocity = Dir;
     }

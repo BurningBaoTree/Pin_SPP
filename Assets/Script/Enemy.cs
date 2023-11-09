@@ -13,7 +13,10 @@ public enum dificalty
 
 public class Enemy : MonoBehaviour
 {
-    public CoolTimeSys cooltime;
+    public Color NormalColor;
+    public Color SlowColor;
+    SpriteRenderer sp;
+    CoolTimeSys cooltime;
     public SkillBase[] skill;
     SkillBase[] usingSckill;
     GameManager gameManager;
@@ -127,6 +130,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        sp = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         difalutPos = this.transform.position;
         cooltime = GetComponent<CoolTimeSys>();
@@ -147,6 +151,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         action();
+        usingAbility();
     }
     private void FixedUpdate()
     {
@@ -198,7 +203,7 @@ public class Enemy : MonoBehaviour
     }
     void HardMode()
     {
-        speed = 18;
+        speed = 25;
         action += ReadCorce;
     }
     void patternSellect()
@@ -261,6 +266,22 @@ public class Enemy : MonoBehaviour
         {
             usingSckill[1].Activeate(WhosActive.Enemy);
             cooltime.CoolTimeStart(1, usingSckill[1].coolTime);
+        }
+    }
+    public void SlowDebuff()
+    {
+        speed *= 0.2f;
+        cooltime.CoolTimeStart(2, 5f);
+        sp.color = SlowColor;
+        action += BackToNormal;
+    }
+    void BackToNormal()
+    {
+        if (cooltime.coolclocks[2].coolEnd)
+        {
+            speed *= 5f;
+            sp.color = NormalColor;
+            action -= BackToNormal;
         }
     }
 }

@@ -176,6 +176,8 @@ public class GameManager : MonoBehaviour
     /// <param name="type"></param>
     void EndActivate(bool type)
     {
+        Skill[0] = null;
+        Skill[1] = null;
         GameHasBeenStarted = false;
         Player.gameObject.SetActive(false);
         Enemy.gameObject.SetActive(false);

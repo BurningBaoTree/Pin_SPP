@@ -13,17 +13,18 @@ public class AddMoreBall : SkillBase
         if ((int)whos == 0)
         {
             pos = GameManager.Inst.Player.transform.position;
-            pos += Vector3.up * 0.5f;
+            pos += Vector3.up;
         }
         else
         {
-            pos = GameManager.Inst.Player.transform.position;
-            pos += Vector3.down * 0.5f;
+            pos = GameManager.Inst.Enemy.transform.position;
+            pos += Vector3.down;
         }
         for (int i = 0; i < extraBall; i++)
         {
             GameObject ball = PoolManager.Inst.SpawnObjectinject(0, pos);
             Ball ballcomp = ball.GetComponent<Ball>();
+            ballcomp.moveActive();
             ballcomp.RanddomwMove();
         }
     }
