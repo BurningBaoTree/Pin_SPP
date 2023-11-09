@@ -2211,7 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4455827944b02bb45afe24d7858862e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coolTime: 15
+  coolTime: 35
   MaxHeal: 100
   HPincrisPerFraim: 2
   incrisedPlayerHP: 0
