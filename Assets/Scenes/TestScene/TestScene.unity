@@ -696,6 +696,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1352014770}
+--- !u!114 &549521847 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9045361713835655150, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+  m_PrefabInstance: {fileID: 9045361712201325748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &594365822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2390,6 +2401,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InGameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1594571514867149661, guid: f9044a9b886f5e3409193973a08375c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9044a9b886f5e3409193973a08375c3, type: 3}
 --- !u!1001 &7522215781504844200
@@ -2779,6 +2794,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameStartPanle
       objectReference: {fileID: 0}
+    - target: {fileID: 7522215782208230231, guid: b1045415e29f5594b97f052b4d2a87b8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7522215782841494858, guid: b1045415e29f5594b97f052b4d2a87b8, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2864,6 +2883,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 847200112}
     m_Modifications:
+    - target: {fileID: 9045361712073477283, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: FriendMassage
+      value: 
+      objectReference: {fileID: 549521847}
     - target: {fileID: 9045361712073477286, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
       propertyPath: m_Name
       value: GameOverPanle
@@ -2968,6 +2991,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9045361712886294792, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9045361712886294799, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3000,6 +3027,30 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9045361713217210474, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045361713303582549, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1202.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045361713303582549, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -189
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045361713303582549, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045361713303582550, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045361713835655150, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 16777215
+      objectReference: {fileID: 0}
     - target: {fileID: 9045361713932419745, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3031,6 +3082,10 @@ PrefabInstance:
     - target: {fileID: 9045361714019573018, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045361714019573019, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61b6fc906480cc54fb73af511a6e4288, type: 3}
