@@ -8,7 +8,8 @@ public enum dificalty
 {
     easy = 0,
     middle,
-    hard
+    hard,
+    none
 }
 
 public class Enemy : MonoBehaviour
@@ -142,7 +143,7 @@ public class Enemy : MonoBehaviour
     }
     private void OnDisable()
     {
-        Dificalty = dificalty.easy;
+        Dificalty = dificalty.none;
     }
     private void Start()
     {
@@ -189,6 +190,7 @@ public class Enemy : MonoBehaviour
         this.transform.position = difalutPos;
         action = () => { };
         FixedAction = () => { };
+        Move =false;
     }
 
     void EasyMode()
@@ -223,6 +225,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 초기에 능력을 가져오는 함수
+    /// </summary>
     void GetAbility()
     {
         ability1 = UnityEngine.Random.Range(0, 5);
@@ -230,13 +235,17 @@ public class Enemy : MonoBehaviour
         usingSckill[0] = skill[ability1];
         usingSckill[1] = skill[ability2];
     }
-
+/*
     //플레이어를 잠시 따라다니는 함수
     void PlayerFallow()
     {
         Dir = gameManager.Player.transform.position;
     }
+*/
 
+    /// <summary>
+    /// 공을 따라다니는 함수
+    /// </summary>
     void ReadCorce()
     {
         Dir = CalResult;
